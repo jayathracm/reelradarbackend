@@ -8,12 +8,11 @@ const { Pool } = pkg;
 // PostgreSQL pool configuration
 const openDb = () => {
   const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-  });
+    connectionString: process.env.reelradar-backend-postgresql.postgres.database.azure.com,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
   // Handle pool errors
   pool.on('error', (err, client) => {
