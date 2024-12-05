@@ -36,6 +36,11 @@ app.get('/test', (req, res) => {
   res.send('Hello from backend');
 });
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.send('Welcome to the Movie App Backend!');
+});
+
 // Routes
 app.use('/user', userRouter);
 app.use('/reviews', reviewRouter);
