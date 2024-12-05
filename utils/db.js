@@ -8,7 +8,7 @@ const { Pool } = pkg;
 // PostgreSQL pool configuration
 const openDb = () => {
   const pool = new Pool({
-    connectionString: process.env.reelradar-backend-postgresql.postgres.database.azure.com,
+    connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
