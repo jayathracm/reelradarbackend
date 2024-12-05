@@ -11,7 +11,22 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 
+// Enhanced error logging
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+
 const app = express();
+
+// Add healthcheck endpoint
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 app.use(cors());
 app.use(express.json());
@@ -33,6 +48,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({ error: err.message });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });

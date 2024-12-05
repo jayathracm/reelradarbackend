@@ -5,9 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha *.test.js",
-    "devStart": "cross-env NODE_ENV=development nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build required'",
+    "prestart": "echo 'Starting application...'",
+    "devStart": "cross-env NODE_ENV=development nodemon index.js"
   },
   "keywords": [],
   "author": "",
