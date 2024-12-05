@@ -51,7 +51,7 @@ app.use('/api', groupDetailsRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('Error stack:', err.stack);
   res.status(err.statusCode || 500).json({ 
     error: err.message || 'Internal Server Error'
   });
@@ -60,6 +60,11 @@ app.use((err, req, res, next) => {
 // Start server
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+// Capture startup errors
+server.on('error', (err) => {
+  console.error('Server startup error:', err);
 });
 
 export default app;
