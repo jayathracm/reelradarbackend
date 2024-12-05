@@ -1,6 +1,6 @@
 import { hash, compare } from "bcrypt";
 import jwt from "jsonwebtoken";
-import { createUser, findUserByIdentifier, findUserByUsername, deleteUserById } from '../models/userModels';
+import { createUser, findUserByIdentifier, findUserByUsername, deleteUserById } from '../models/userModels.js';
 import { fetchUserFavorites } from "../models/favoriteModel.js";
 
 const { sign } = jwt;
