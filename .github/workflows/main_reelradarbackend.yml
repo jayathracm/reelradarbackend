@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Install build tools
+      - name: Install Visual Studio Build Tools
         run: |
-          npm install -g node-gyp
+          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows10SDK" -y
           npm config set msvs_version 2019
 
       - name: Clear npm cache and node_modules
@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install --platform=win32 --arch=x64
+          npm install
           npm rebuild bcrypt --build-from-source
 
       - name: Build
