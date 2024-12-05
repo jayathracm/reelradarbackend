@@ -8,7 +8,7 @@
   "main": "server.cjs",
   "scripts": {
     "start": "node --experimental-specifier-resolution=node server.cjs",
-    "build": "npm install",
+    "build": "npm install --platform=win32 --arch=x64",
     "prestart": "echo 'Starting application...'"
   },
   "dependencies": {
