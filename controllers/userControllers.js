@@ -1,4 +1,4 @@
-import { hash, compare } from "bcrypt";
+import { hash, compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { createUser, findUserByIdentifier, findUserByUsername, deleteUserById } from '../models/userModels.js';
 import { fetchUserFavorites } from "../models/favoriteModel.js";
