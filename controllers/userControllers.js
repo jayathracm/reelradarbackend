@@ -1,4 +1,5 @@
-import { hash, compare } from "bcryptjs";
+import pkg from "bcryptjs";
+const { hash, compare } = pkg;
 import jwt from "jsonwebtoken";
 import { createUser, findUserByIdentifier, findUserByUsername, deleteUserById } from '../models/userModels.js';
 import { fetchUserFavorites } from "../models/favoriteModel.js";
@@ -100,7 +101,7 @@ export const getFavoritesByUsername = async (req, res) => {
       console.error("Error fetching favorites by username:", err.message);
       res.status(500).json({ error: "Failed to fetch user's favorite movies." });
     }
-  };
+};
 
 export const deleteUserHandler = async (req, res) => {
     const userId = req.userId;
