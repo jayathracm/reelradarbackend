@@ -26,9 +26,10 @@ jobs:
         run: echo "GYP_MSVS_VERSION=2019" >> $env:GITHUB_ENV
 
       - name: Clear npm cache and node_modules
+        shell: bash
         run: |
           npm cache clean --force
-          if (Test-Path node_modules) { Remove-Item -Recurse -Force node_modules }
+          rm -rf node_modules
 
       - name: Install dependencies
         run: |
