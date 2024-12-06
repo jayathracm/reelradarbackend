@@ -23,13 +23,12 @@ jobs:
           choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows10SDK" -y
 
       - name: Set environment variable for MSVS
-        run: |
-          echo "GYP_MSVS_VERSION=2019" >> $GITHUB_ENV
+        run: echo "GYP_MSVS_VERSION=2019" >> $env:GITHUB_ENV
 
       - name: Clear npm cache and node_modules
         run: |
           npm cache clean --force
-          if exist node_modules rd /s /q node_modules
+          if (Test-Path node_modules) { Remove-Item -Recurse -Force node_modules }
 
       - name: Install dependencies
         run: |
@@ -46,7 +45,7 @@ jobs:
           path: |
             .
             !node_modules/.cache
-            !**.git**
+            !**/.git**
 
   deploy:
     runs-on: ubuntu-latest
