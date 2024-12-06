@@ -21,7 +21,10 @@ jobs:
       - name: Install Visual Studio Build Tools
         run: |
           choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows10SDK" -y
-          npm config set msvs_version 2019
+
+      - name: Set environment variable for MSVS
+        run: |
+          echo "GYP_MSVS_VERSION=2019" >> $GITHUB_ENV
 
       - name: Clear npm cache and node_modules
         run: |
