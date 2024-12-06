@@ -1,24 +1,31 @@
 const startServer = async () => {
     try {
       // Import app configuration
-      const app = await import('./index.js');
+      const { default: app } = await import('./index.js');
       
-      // Access the Express app instance
-      const server = app.default;
+      // Ensure port is correctly set
+      const PORT = process.env.PORT || 3001;
       
-      // Log successful startup
-      console.log('Server initialized successfully');
-      
+      // Create server instance and start listening
+      const server = app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server initialized and running on port ${PORT}`);
+      });
+  
+      // Handle server-specific errors
+      server.on('error', (error) => {
+        console.error('Server error:', error);
+        process.exit(1);
+      });
+  
       return server;
     } catch (err) {
-      // Enhanced error logging
       console.error('Server initialization failed:', err);
       console.error('Stack trace:', err.stack);
       process.exit(1);
     }
   };
   
-  // Add process error handlers
+  // Process error handlers
   process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
     console.error('Stack trace:', err.stack);
@@ -31,12 +38,17 @@ const startServer = async () => {
     process.exit(1);
   });
   
-  // Start server with immediate invocation
-  (async () => {
-    try {
-      await startServer();
-    } catch (err) {
-      console.error('Failed to start server:', err);
-      process.exit(1);
-    }
-  })();
+  // Export the server startup function
+  module.exports = startServer;
+  
+  // Start server immediately in production
+  if (process.env.NODE_ENV === 'production') {
+    (async () => {
+      try {
+        await startServer();
+      } catch (err) {
+        console.error('Failed to start server:', err);
+        process.exit(1);
+      }
+    })();
+  }
