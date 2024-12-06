@@ -58,8 +58,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 // Capture startup errors
@@ -67,4 +67,4 @@ server.on('error', (err) => {
   console.error('Server startup error:', err);
 });
 
-export default app;
+export default server; // Export the server instance
